@@ -49,24 +49,31 @@ function timer(array) {
 function sort() {
     var heights = []
 
+    const dropdown = document.getElementById('dropdown').value;
+
     arr.forEach(subarr => {
         heights.push(parseInt(subarr[1]))
     });
     
-    //setInterval(() => timer(heights))
-
     //heights.sort(function(a, b){return a - b});
 
-    //bubbleSort(heights);
+    const speed = document.getElementById('speed').value
 
-    //insertionSort(heights)
-    
-    //selectionSort(heights)
-
-    heapSort(heights)
+    if(dropdown == 'bubble') {
+        bubbleSort(heights, speed);
+    }
+    if(dropdown == 'insertion') {
+        insertionSort(heights, speed);
+    }
+    if(dropdown == 'selection') {
+        selectionSort(heights, speed);
+    }
+    if(dropdown == 'heap') {
+        heapSort(heights, speed);
+    }
 }
 
-function bubbleSort(arr) {
+function bubbleSort(arr, speed) {
     console.clear()
     let len = arr.length;
     let checked = false;
@@ -81,15 +88,14 @@ function bubbleSort(arr) {
                     checked = true;
                 }
                 if (i == 0) {
-                    console.log(arr)
                     timer(arr)
                 }
             }
-        }, 0);
+        }, speed);
     } while (checked);
 }
 
-function insertionSort(arr) {
+function insertionSort(arr, speed) {
     console.clear()
     var cases = [];
     let len = arr.length;
@@ -103,25 +109,21 @@ function insertionSort(arr) {
         arr[j+1] = temp
         cases.push(arr.toString())
     }
-    console.log(cases)
 
-    interval = 50
     a = 1
 
     cases.forEach(cas => {
         setTimeout(() => {
             cas = cas.split(',')
-            console.log()
             cas.forEach(val => parseInt(val))
             timer(cas)
-        }, interval*a)
+        }, speed*a)
         a++
     });
 }
 
-function selectionSort(arr) {
+function selectionSort(arr, speed) {
     let len = arr.length;
-    interval = 50
     a = 1
     for(let i = 0; i < len; i++) {
         setTimeout(() => {
@@ -132,20 +134,18 @@ function selectionSort(arr) {
             }
         }
         if (min != i) {
-            // Swapping the elements
              let tmp = arr[i]; 
              arr[i] = arr[min];
              arr[min] = tmp;      
             }
-            console.log(arr)
             timer(arr)
-        }, interval*a)
+        }, speed*a)
         a++
     }
 }
 
 var array_length;
-/* to create MAX  array */  
+
 function heap_root(input, i) {
     var left = 2 * i + 1;
     var right = 2 * i + 2;
@@ -172,12 +172,11 @@ function swap(input, index_A, index_B) {
     input[index_B] = temp;
 }
 
-function heapSort(arr) {
+function heapSort(arr, speed) {
     console.clear();
     array_length = arr.length;
 
     let cases = [];
-    let interval = 100;
     let a = 0;
 
     for (var i = Math.floor(array_length / 2); i >= 0; i -= 1)      {
@@ -195,7 +194,7 @@ function heapSort(arr) {
             cas = cas.split(',')
             cas.forEach(val => parseInt(val))
             timer(cas)
-        }, interval*a)
+        }, speed*a)
         a++
     });
 }
