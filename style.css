@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+}
+
+.topbar {
+    height: 50px;
+    margin-inline: auto;
+    margin-top: 5px;
+    border-radius: 10px;
+    width: calc(100% - 20px);
+    background: black;
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+    gap: 10px;
+}
+
+.generate {
+    background: white;
+    width: 100px;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.number_input {
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    width: 100px;
+    outline: none;
+    text-align: center;
+}
+
+.dropdown {
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    width: 100px;
+    outline: none;
+    text-align: center;
+    background: white;
+}
+
+.table {
+    width: calc(100% - 20px - 18px);
+    height: calc(100vh - 100px);
+    margin-top: 10px;
+    margin-inline: auto;
+    border-radius: 10px;
+    background: white;
+    border: 3px solid black;
+    padding: 5px;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.bar {
+    height: 100%;
+    width: 50%;
+    max-height: 0;
+    border-radius: 500px;
+    background: black;
+    transition: .5s ease;
+}
