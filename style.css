@@ -1,14 +1,17 @@
 body {
     margin: 0;
+    --back: #1e1e2e;
+    --fore: #89b4fa;
+    background: var(--back);
 }
 
 .topbar {
     height: 50px;
     margin-inline: auto;
     margin-top: 5px;
-    border-radius: 10px;
+    border-radius: 500px;
     width: calc(100% - 20px);
-    background: black;
+    background: var(--fore);
     display: flex;
     justify-content: center;
     padding: 5px 0;
@@ -16,9 +19,10 @@ body {
 }
 
 .generate {
-    background: white;
+    color: var(--fore);
+    background: var(--back);
     width: 100px;
-    border-radius: 10px;
+    border-radius: 500px;
     padding: 14px;
     font-size: 18px;
     text-align: center;
@@ -26,7 +30,9 @@ body {
 }
 
 .number_input {
-    border-radius: 10px;
+    color: var(--fore);
+    background: var(--back);
+    border-radius: 500px;
     border: none;
     font-size: 18px;
     width: 100px;
@@ -35,13 +41,14 @@ body {
 }
 
 .dropdown {
-    border-radius: 10px;
+    color: var(--fore);
+    border-radius: 500px;
     border: none;
     font-size: 18px;
-    width: 100px;
+    padding: 0 50px;
     outline: none;
     text-align: center;
-    background: white;
+    background: var(--back);
 }
 
 .table {
@@ -50,19 +57,19 @@ body {
     margin-top: 10px;
     margin-inline: auto;
     border-radius: 10px;
-    background: white;
-    border: 3px solid black;
+    background: var(--back);
+    border: 3px solid var(--fore);
     padding: 5px;
     display: flex;
-    align-items: flex-end;
-    gap: 2px;
+    align-items: end;
+    gap: 4px;
 }
 
 .bar {
     height: 100%;
     width: 50%;
     max-height: 0;
-    border-radius: 500px;
-    background: black;
-    transition: .5s ease;
+    border-radius: 100px 20px 20px 100px;
+    background: var(--fore);
+    transition: max-height .5s ease;
 }
