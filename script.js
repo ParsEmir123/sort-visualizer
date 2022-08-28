@@ -61,7 +61,9 @@ function sort() {
 
     //insertionSort(heights)
     
-    selectionSort(heights)
+    //selectionSort(heights)
+
+    heapSort(heights)
 }
 
 function bubbleSort(arr) {
@@ -113,26 +115,87 @@ function insertionSort(arr) {
             cas.forEach(val => parseInt(val))
             timer(cas)
         }, interval*a)
-        a+=1
+        a++
     });
 }
 
 function selectionSort(arr) {
-    let len = arr.length
+    let len = arr.length;
+    interval = 50
+    a = 1
     for(let i = 0; i < len; i++) {
-        // Finding the smallest number in the subarray
-        let min = i;
-        for(let j = i+1; j < len; j++){
+        setTimeout(() => {
+            let min = i;
+            for(let j = i+1; j < len; j++){
             if(arr[j] < arr[min]) {
                 min=j; 
             }
-         }
-         if (min != i) {
-             // Swapping the elements
+        }
+        if (min != i) {
+            // Swapping the elements
              let tmp = arr[i]; 
              arr[i] = arr[min];
              arr[min] = tmp;      
-             console.log(arr)
-        }
+            }
+            console.log(arr)
+            timer(arr)
+        }, interval*a)
+        a++
     }
+}
+
+var array_length;
+/* to create MAX  array */  
+function heap_root(input, i) {
+    var left = 2 * i + 1;
+    var right = 2 * i + 2;
+    var max = i;
+
+    if (left < array_length && input[left] > input[max]) {
+        max = left;
+    }
+
+    if (right < array_length && input[right] > input[max])     {
+        max = right;
+    }
+
+    if (max != i) {
+        swap(input, i, max);
+        heap_root(input, max);
+    }
+}
+
+function swap(input, index_A, index_B) {
+    var temp = input[index_A];
+
+    input[index_A] = input[index_B];
+    input[index_B] = temp;
+}
+
+function heapSort(arr) {
+    console.clear();
+    array_length = arr.length;
+
+    let cases = [];
+    let interval = 100;
+    let a = 0;
+
+    for (var i = Math.floor(array_length / 2); i >= 0; i -= 1)      {
+        heap_root(arr, i);
+    }
+
+    for (i = arr.length - 1; i > 0; i--) {
+        swap(arr, 0, i);
+        array_length--;
+        heap_root(arr, 0);
+        cases.push(arr.toString());
+    }
+    cases.forEach(cas => {
+        setTimeout(() => {
+            cas = cas.split(',')
+            cas.forEach(val => parseInt(val))
+            timer(cas)
+        }, interval*a)
+        a++
+    });
 }
