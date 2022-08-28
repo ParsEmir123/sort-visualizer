@@ -10,10 +10,12 @@
 <body>
     <div class="topbar">
         <input class="number_input" id="size" type="text" placeholder="size" required>
-        <select class="dropdown">
-            <option value="merge">Merge</option>
-            <option value="quick">Quick</option>
+        <input class="number_input" id="speed" type="text" placeholder="speed" required>
+        <select class="dropdown" id="dropdown">
             <option value="bubble">Bubble</option>
+            <option value="insertion">Insertion</option>
+            <option value="selection">Selection</option>
+            <option value="heap">Heap</option>
           </select>
         <div class="generate" onclick="generate()">Generate</div>
         <div class="generate" onclick="sort()">Sort</div>
