@@ -1,6 +1,9 @@
 var arr = [];
 
 function generate() {
+    for (let i=1; i<1000; i++) {
+        window.clearInterval(i);
+    }
     var size = document.getElementById('size').value;
     var table = document.getElementById('table');
 
@@ -9,6 +12,11 @@ function generate() {
     [].slice.call(table.children).forEach(bar => {
         bar.style.maxHeight = '0';
     });
+
+    var ti = 500;
+
+    if(table.innerHTML=='') ti = 0
+
     setTimeout(()  => {
         table.innerHTML = ''
 
@@ -23,56 +31,108 @@ function generate() {
             [].slice.call(table.children).forEach(bar => {
                 bar_height = `${(Math.floor(Math.random() * 90)+5).toString()}%`;
                 bar.style.maxHeight = bar_height;
-                var value = bar_height.slice(0,2);
+                var value = [parseInt(bar.id), bar_height.replace('%', '')];
                 arr.push(value)
             });            
-        }, 500);
-    }, 500)
+        }, 100);
+    }, ti)
 }
 
-function merge(left, right) {
-    let sortedArr = []; // the sorted elements will go here
-    if(left.length == 1 && right.length ==1){
-        var r =Math.floor(Math.random() * 255);
-        var g =Math.floor(Math.random() * 255);
-        var b =Math.floor(Math.random() * 255);
-        var color = `rgb(${r.toString()},${g.toString()},${b.toString()})`;
-        [].slice.call(table.children).forEach(bar => {
-            if(bar.maxHeight == `${left.toString()}%`){
-                bar.style.background = color;
-            }
-        }),
-        [].slice.call(table.children).forEach(bar => {
-            if(bar.maxHeight == `${right.toString()}%`){
-                bar.style.background = color;
-            }
-        })
+function timer(array) {
+    for(i=0; i<array.length; i++) {
+        const bar = document.getElementById(i);
+        bar.style.transition = '.1s';
+        bar.style.maxHeight = array[i].toString()+'%';
     }
-    while (left.length && right.length) {
-        // insert the smallest element to the sortedArr
-        if (left[0] < right[0]) {
-        sortedArr.push(left.shift());
-        } else {
-        sortedArr.push(right.shift());
-        }
-    }
-    // use spread operator and create a new array, combining the three arrays
-    return [...sortedArr, ...left, ...right];
-}
-function mergeSort(arr) {
-    const half = arr.length / 2;
-
-    // the base case is array length <=1
-    if (arr.length <= 1) {
-        return arr;
-    }
-
-    const left = arr.splice(0, half); // the first half of the array
-    const right = arr;
-    return merge(mergeSort(left), mergeSort(right));
 }
 
 function sort() {
-    mergeSort(arr)
-    console.log(arr)
+    var heights = []
+
+    arr.forEach(subarr => {
+        heights.push(parseInt(subarr[1]))
+    });
+    
+    //setInterval(() => timer(heights))
+
+    //heights.sort(function(a, b){return a - b});
+
+    //bubbleSort(heights);
+
+    //insertionSort(heights)
+    
+    selectionSort(heights)
+}
+
+function bubbleSort(arr) {
+    console.clear()
+    let len = arr.length;
+    let checked = false;
+    do {
+        checked = false;
+        setInterval(() => {
+            for (let i = 0; i < len; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    let tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                    checked = true;
+                }
+                if (i == 0) {
+                    console.log(arr)
+                    timer(arr)
+                }
+            }
+        }, 0);
+    } while (checked);
+}
+
+function insertionSort(arr) {
+    console.clear()
+    var cases = [];
+    let len = arr.length;
+    for (let i = 1; i < len; i++) {
+        let j = i - 1
+        let temp = arr[i]
+        while (j >= 0 && arr[j] > temp) {
+            arr[j + 1] = arr[j]
+            j--
+        }
+        arr[j+1] = temp
+        cases.push(arr.toString())
+    }
+    console.log(cases)
+
+    interval = 50
+    a = 1
+
+    cases.forEach(cas => {
+        setTimeout(() => {
+            cas = cas.split(',')
+            console.log()
+            cas.forEach(val => parseInt(val))
+            timer(cas)
+        }, interval*a)
+        a+=1
+    });
+}
+
+function selectionSort(arr) {
+    let len = arr.length
+    for(let i = 0; i < len; i++) {
+        // Finding the smallest number in the subarray
+        let min = i;
+        for(let j = i+1; j < len; j++){
+            if(arr[j] < arr[min]) {
+                min=j; 
+            }
+         }
+         if (min != i) {
+             // Swapping the elements
+             let tmp = arr[i]; 
+             arr[i] = arr[min];
+             arr[min] = tmp;      
+             console.log(arr)
+        }
+    }
 }
